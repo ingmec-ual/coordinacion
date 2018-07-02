@@ -1,5 +1,5 @@
-%function [] = plan_areas()
-clc; clear;
+function [] = plan_areas()
+clc;
 
 % Get raw cell data:
 [~,~,D]=xlsread('asignaturas_ingmec.xlsx');
@@ -32,5 +32,4 @@ end
 disp('    AREA                               CREDITOS    (%) TOTAL');
 disp(CREDITOS_TABLA);
 
-
-%end
+end
