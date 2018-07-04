@@ -1,55 +1,64 @@
 %function [] = crear_tribnales()
 clc; clear;
 
-MAX_PROF = 5; % El excel tiene hasta 5 columnas de profesor por asignatura
+% Cargar lista de asignaturas del plan:
+[~,~,datAsig]=xlsread('asignaturas_ingmec.xlsx');
+codigosAsign = [datAsig{2:end,1}];
+
+% Quitar NaN (blancos en excel)
+codigosAsign(find(isnan(codigosAsign)))=[];
 
 % Get raw cell data:
-[~,~,D]=xlsread('asignaturas_ingmec.xlsx');
+[~,~,D]=xlsread('Odocente1819.xlsx');
 N = size(D,1);
 
-% Crear map: profesor -> creditos
+% Numeros de columna:
+colCodAsign = 7;
+colProfesor = 32;
+colProfesorHoras = 33;
+
+% Crear map: profesor -> numero de horas
 M = containers.Map;
 
 % para cada fila del excel (menos la primera = header)
 for i=2:N
-    creditos = D{i,3};
-
-    % Puede haber hasta MAX_PROF profesores:
-    NUM_PROFS = 0; % para esta asignatura concreta
-    for ind_prof = 1:MAX_PROF
-        prof = D{i,4+ind_prof};
-        if (~isnan(prof))
-            NUM_PROFS = NUM_PROFS + 1;
-        end
+    asign = D(i,colCodAsign);
+    asign = asign{1}; % Extraer de cell
+    
+    % Es del plan que buscamos?
+    if (isempty(find(codigosAsign==asign,1)))
+        continue;
     end
     
-    % Acumular creditos a cada profesor:
-    for ind_prof = 1:MAX_PROF
-        prof = D{i,4+ind_prof};
-        if (isnan(prof)) % vacio?
-            continue;
-        end
-        
-        cr = creditos / NUM_PROFS;
-        
-        if (M.isKey(prof))
-            M(prof) = M(prof) + cr;
-        else
-            M(prof) = cr;
-        end
-                       
-    end % end for each profesor
+    
+    horas = D{i,colProfesorHoras};
+
+    % Acumular horas profesor:
+    prof = D{i,colProfesor};
+    % vacio o "PROFESOR XXX PENDIENTE DE CONTRATAR"?
+    if (isnan(prof)) 
+        continue;
+    end
+    if (startsWith(prof,'PROFESOR'))
+        continue;
+    end
+
+    if (M.isKey(prof))
+        M(prof) = M(prof) + horas;
+    else
+        M(prof) = horas;
+    end
    
 end % end for each row
 
 % Crear una tabla con los profesores y los creditos asignados 
 % en total en el plan:
 k=M.keys; v=M.values; 
-CREDITOS_TABLA={ k{:};v{:}}';
-CREDITOS_TABLA=sortrows(CREDITOS_TABLA,2);
-crs = CREDITOS_TABLA(:,2);
+HORAS_TABLA={ k{:};v{:}}';
+HORAS_TABLA=sortrows(HORAS_TABLA,2);
+crs = HORAS_TABLA(:,2);
 
-disp('    PROFESOR                         CREDITOS');
-disp(CREDITOS_TABLA);
+disp('    PROFESOR                         HORAS');
+disp(HORAS_TABLA);
 
 %end
