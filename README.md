@@ -1,24 +1,6 @@
 # coordinacion
-Ayuda a coordinacion título Ingeniería Mecánica (UAL)
+Ayuda a coordinacion tÃ­tulo IngenierÃ­a MecÃ¡nica (UAL)
 
-## Resultado créditos por áreas:
+El programa principal es [`crear_tribunales.m`](https://github.com/ingmec-ual/coordinacion/blob/master/crear_tribunales.m) y se puede ejecutar desde MATLAB descargando este repositorio (aquÃ­ [ZIP](https://github.com/ingmec-ual/coordinacion/archive/master.zip)).
 
-    AREA                               CREDITOS    (%) TOTAL
-    'CC. de los Materiales e Ingen'     [ 6]    [ 2.5000]
-    'Estadística e Investigación O'     [ 6]    [ 2.5000]
-    'Ingeniería Agroforestal'           [ 6]    [ 2.5000]
-    'Lenguajes y Sistemas Informát'     [ 6]    [ 2.5000]
-    'Organización de Empresas'          [ 6]    [ 2.5000]
-    'Proyectos de Ingeniería'           [ 6]    [ 2.5000]
-    'Álgebra'                           [ 6]    [ 2.5000]
-    'Expresión Gráfica en la Ingen'     [12]    [      5]
-    'Ingeniería Eléctrica'              [12]    [      5]
-    'Ingeniería Hidráulica'             [12]    [      5]
-    'Ingeniería de la Construcción'     [12]    [      5]
-    'Matemática Aplicada'               [12]    [      5]
-    'Tecnología Electrónica'            [12]    [      5]
-    'Física Aplicada'                   [18]    [ 7.5000]
-    'Ingeniería de Sistemas y Auto'     [18]    [ 7.5000]
-    'Ingeniería Química'                [24]    [     10]
-    'Ingeniería Mecánica'               [66]    [27.5000]
-
+El listado de tribunales actualmente activo estÃ¡ [aquÃ­](https://docs.google.com/spreadsheets/d/1dytwLxk0odVOylk6cBjPBz4wGrvOfAJDPVx4Icz9o6I/edit#gid=0).
